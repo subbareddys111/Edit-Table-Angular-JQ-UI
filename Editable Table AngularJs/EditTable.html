@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="Edittable.js"></script>
+  </head>
+  <body>
+    <div ng-app="demo" ng-controller="Ctrl">
+      <h2>Editable Table using Angular.js</h2>
+        <table border='1' style="background:#66ffcc; width:500px;" >
+          <thead>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Country</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="contact in model.contacts" ng-include="getTemplate(contact)">
+            </tr>
+          </tbody>
+        </table>
+    
+    <script type="text/ng-template" id="display">
+        <td>{{contact.name}}</td>
+        <td>{{contact.age}}</td>
+        <td>{{contact.gender}}</td>
+        <td>{{contact.country}}</td>
+        <td>
+            <button ng-click="editContact(contact)">Edit</button>
+        </td>
+    </script>
+    <script type="text/ng-template" id="edit">
+        <td><input type="text" ng-model="model.selected.name" /></td>
+        <td><input type="text" ng-model="model.selected.age" /></td>
+        <td><input type="text" ng-model="model.selected.gender" /></td>
+        <td><input type="text" ng-model="model.selected.country" /></td>
+        <td>
+            <button ng-click="saveContact($index)">Save</button>
+            <button ng-click="reset()">Cancel</button>
+        </td>
+    </script>
+</div>
+</body>
+</html>
